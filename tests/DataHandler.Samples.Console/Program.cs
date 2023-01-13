@@ -25,8 +25,6 @@ await client.SubscribeToTradesAsync(async tradeResult =>
     Log.Information("#2: {@TradeResult}", tradeResult);
 });
 
-Console.ReadLine();
-
 // TODO: Make it work with binary data too
 await client.EmitAsync("""
 {

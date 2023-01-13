@@ -4,8 +4,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9146C75-8F6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{04FB646A-C626-4603-9941-64E2BDE800F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler", "src\DataHandler\DataHandler.csproj", "{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Core", "src\DataHandler.Core\DataHandler.Core.csproj", "{693B5EB5-BF92-4448-8AFE-19CBF8F0B2FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Results", "src\DataHandler.Results\DataHandler.Results.csproj", "{87A0950B-0700-49CB-83E8-FF0CA364947F}"
@@ -14,16 +12,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Dummy.Tests.Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Dummy", "src\DataHandler.Dummy\DataHandler.Dummy.csproj", "{DAB8CA4F-27CA-4B4A-A2E2-DDB19E5957CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Samples.Console", "tests\DataHandler.Samples.Console\DataHandler.Samples.Console.csproj", "{FB676677-1299-4DD4-BB44-872B0A0D053F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{693B5EB5-BF92-4448-8AFE-19CBF8F0B2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{693B5EB5-BF92-4448-8AFE-19CBF8F0B2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{693B5EB5-BF92-4448-8AFE-19CBF8F0B2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,12 +36,16 @@ Global
 		{DAB8CA4F-27CA-4B4A-A2E2-DDB19E5957CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB8CA4F-27CA-4B4A-A2E2-DDB19E5957CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB8CA4F-27CA-4B4A-A2E2-DDB19E5957CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB676677-1299-4DD4-BB44-872B0A0D053F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB676677-1299-4DD4-BB44-872B0A0D053F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB676677-1299-4DD4-BB44-872B0A0D053F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB676677-1299-4DD4-BB44-872B0A0D053F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CEE6D677-A2D1-43E3-B712-60E6FF9B9E26} = {A9146C75-8F6C-4BDB-AFB5-286F8DD31D8C}
 		{693B5EB5-BF92-4448-8AFE-19CBF8F0B2FB} = {A9146C75-8F6C-4BDB-AFB5-286F8DD31D8C}
 		{87A0950B-0700-49CB-83E8-FF0CA364947F} = {A9146C75-8F6C-4BDB-AFB5-286F8DD31D8C}
 		{559979EC-38BD-4A26-BEE6-5D2C4423A08B} = {04FB646A-C626-4603-9941-64E2BDE800F2}
 		{DAB8CA4F-27CA-4B4A-A2E2-DDB19E5957CA} = {A9146C75-8F6C-4BDB-AFB5-286F8DD31D8C}
+		{FB676677-1299-4DD4-BB44-872B0A0D053F} = {04FB646A-C626-4603-9941-64E2BDE800F2}
 	EndGlobalSection
 EndGlobal
