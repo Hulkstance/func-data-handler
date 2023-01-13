@@ -43,7 +43,7 @@ public sealed class SubscriptionCollection
         }
     }
 
-    public Subscription? GetById(long id)
+    public Subscription? GetById(Guid id)
     {
         lock (_subscriptions)
         {
@@ -51,7 +51,7 @@ public sealed class SubscriptionCollection
         }
     }
 
-    public bool TryGetValue(long id, [NotNullWhen(true)] out Subscription? subscription)
+    public bool TryGetValue(Guid id, [NotNullWhen(true)] out Subscription? subscription)
     {
         lock (_subscriptions)
         {

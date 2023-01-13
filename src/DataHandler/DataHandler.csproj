@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataHandler.Core\DataHandler.Core.csproj" />
+    <ProjectReference Include="..\DataHandler.Dummy\DataHandler.Dummy.csproj" />
   </ItemGroup>
 
 </Project>

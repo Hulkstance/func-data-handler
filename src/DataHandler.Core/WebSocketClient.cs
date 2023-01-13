@@ -3,7 +3,7 @@ using DataHandler.Core.Internal;
 
 namespace DataHandler.Core;
 
-public sealed class SocketFactory
+public sealed class WebSocketClient
 {
     private readonly AsyncEvent<DataReceivedEventArgs> _dataReceivedEvent = new();
 
