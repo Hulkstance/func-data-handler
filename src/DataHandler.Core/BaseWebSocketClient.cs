@@ -109,19 +109,27 @@ public abstract class BaseWebSocketClient : IDisposable
         var timestamp = DateTimeOffset.Now;
 
         var messageEvent = new MessageEvent(e.Message, timestamp);
-        foreach (var subscription in _subscriptions
-                     .GetAll()
-                     .Where(subscription => MessageMatchesHandler(messageEvent.Data, subscription.Request)))
-        {
-            var userProcessTime = await MeasureUserProcessTime(async () => await subscription.DataHandler(messageEvent));
 
-            if (userProcessTime.TotalMilliseconds > 500)
+        try
+        {
+            foreach (var subscription in _subscriptions
+                         .GetAll()
+                         .Where(subscription => MessageMatchesHandler(messageEvent.Data, subscription.Request)))
             {
-                _logger.LogTrace("Slow data handler ({UserProcessTimeMs} ms user code), consider " +
-                                 "offloading data handling to another thread. Data from this socket may arrive late " +
-                                 "or not at all if message processing is continuously slow.",
-                    userProcessTime.TotalMilliseconds);
+                var userProcessTime = await MeasureUserProcessTime(async () => await subscription.DataHandler(messageEvent));
+
+                if (userProcessTime.TotalMilliseconds > 500)
+                {
+                    _logger.LogTrace("Slow data handler ({UserProcessTimeMs} ms user code), consider " +
+                                     "offloading data handling to another thread. Data from this socket may arrive late " +
+                                     "or not at all if message processing is continuously slow.",
+                        userProcessTime.TotalMilliseconds);
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Subscriptions have failed: {Message}", ex.Message);
         }
     }
 
