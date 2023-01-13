@@ -47,10 +47,10 @@ public sealed class ClientFactory : IDisposable
         return ValueTask.CompletedTask;
     }
 
-    public async ValueTask SubscribeToTradesAsync(Func<DataEvent<TradeResponse>, ValueTask> tradeFunc)
+    public ValueTask SubscribeToTradesAsync(Func<DataEvent<TradeResponse>, ValueTask> tradeFunc)
     {
         var request = new TradeRequest("trade", "BTC/USDT");
-        await SubscribeAsync(request, tradeFunc);
+        return SubscribeAsync(request, tradeFunc);
     }
 
     private bool MessageMatchesHandler(string data, object request)
