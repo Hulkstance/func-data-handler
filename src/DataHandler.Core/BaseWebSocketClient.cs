@@ -77,6 +77,7 @@ public abstract class BaseWebSocketClient : IDisposable
     {
         var subscription = new Subscription(Guid.NewGuid(), request, async messageEvent =>
         {
+            // TODO: SerializationFactory
             var result = messageEvent.Data.Deserialize<SocketResponse<T>>(new JsonSerializerOptions
             {
                 NumberHandling = JsonNumberHandling.AllowReadingFromString
@@ -84,14 +85,11 @@ public abstract class BaseWebSocketClient : IDisposable
 
             if (!result.IsSuccess)
             {
-                _logger.LogError("Failed to deserialize: {Message}", result.Error!.Message);
+                _logger.LogError("{ErrorMessage}", result.Error!.Message);
                 return;
             }
 
-            if (result.IsDefined(out var data))
-            {
-                await dataHandler(new DataEvent<T>(data.Data, messageEvent.ReceiveTimestamp));
-            }
+            await dataHandler(new DataEvent<T>(result.Entity.Data, messageEvent.ReceiveTimestamp));
         });
 
         _subscriptions.Add(subscription);
@@ -115,11 +113,11 @@ public abstract class BaseWebSocketClient : IDisposable
                      .GetAll()
                      .Where(subscription => MessageMatchesHandler(messageEvent.Data, subscription.Request)))
         {
-            var userProcessTime = await GetProcessTime(async () => await subscription.DataHandler(messageEvent));
+            var userProcessTime = await MeasureUserProcessTime(async () => await subscription.DataHandler(messageEvent));
 
             if (userProcessTime.TotalMilliseconds > 500)
             {
-                _logger.LogTrace("Message processing slow ({UserProcessTimeMs} ms user code), consider " +
+                _logger.LogTrace("Slow data handler ({UserProcessTimeMs} ms user code), consider " +
                                  "offloading data handling to another thread. Data from this socket may arrive late " +
                                  "or not at all if message processing is continuously slow.",
                     userProcessTime.TotalMilliseconds);
@@ -127,7 +125,7 @@ public abstract class BaseWebSocketClient : IDisposable
         }
     }
 
-    private async Task<TimeSpan> GetProcessTime(Func<ValueTask> func)
+    private async Task<TimeSpan> MeasureUserProcessTime(Func<ValueTask> func)
     {
         var userProcessTime = Stopwatch.StartNew();
 

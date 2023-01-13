@@ -52,7 +52,7 @@ public class DummyWebSocketClientTests
         """);
 
         // Assert
-        _logger.Received(1).Log(LogLevel.Trace, Arg.Is<string>(s => s.Contains("Message processing slow")));
+        _logger.Received(1).Log(LogLevel.Trace, Arg.Is<string>(s => s.Contains("Slow data handler")));
     }
 
     [Fact]
