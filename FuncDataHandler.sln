@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler", "DataHandler\DataHandler.csproj", "{925B521F-58B3-4E32-B8C3-4BAEF5B3F847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Core", "DataHandler.Core\DataHandler.Core.csproj", "{9BEF61CC-F1DA-474D-8EB4-22424605C5FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler.Results", "DataHandler.Results\DataHandler.Results.csproj", "{BD51A15C-7004-4F24-AE12-9B87EC692184}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{925B521F-58B3-4E32-B8C3-4BAEF5B3F847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{925B521F-58B3-4E32-B8C3-4BAEF5B3F847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{925B521F-58B3-4E32-B8C3-4BAEF5B3F847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{925B521F-58B3-4E32-B8C3-4BAEF5B3F847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BEF61CC-F1DA-474D-8EB4-22424605C5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BEF61CC-F1DA-474D-8EB4-22424605C5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BEF61CC-F1DA-474D-8EB4-22424605C5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BEF61CC-F1DA-474D-8EB4-22424605C5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD51A15C-7004-4F24-AE12-9B87EC692184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD51A15C-7004-4F24-AE12-9B87EC692184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD51A15C-7004-4F24-AE12-9B87EC692184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD51A15C-7004-4F24-AE12-9B87EC692184}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
