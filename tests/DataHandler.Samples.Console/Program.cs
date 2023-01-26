@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using DataHandler.Dummy;
+﻿using DataHandler.Dummy;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Serilog.Sinks.SystemConsole.Themes;
