@@ -85,11 +85,16 @@ public abstract class BaseWebSocketClient : IDisposable
 
             if (!result.IsSuccess)
             {
-                _logger.LogError("{ErrorMessage}", result.Error!.Message);
+                _logger.LogError("Error occurred while deserializing data: {Error}", result.Error!.Message);
                 return;
             }
 
+            var userProcessTime = Stopwatch.StartNew();
+
             await dataHandler(new DataEvent<T>(result.Entity.Data, messageEvent.ReceiveTimestamp));
+
+            userProcessTime.Stop();
+            _logger.LogTrace("Message processed in {UserProcessTimeMs} ms user code", userProcessTime.ElapsedMilliseconds);
         });
 
         _subscriptions.Add(subscription);
@@ -106,40 +111,22 @@ public abstract class BaseWebSocketClient : IDisposable
 
     private async ValueTask OnDataReceived(DataReceivedEventArgs e)
     {
-        var timestamp = DateTimeOffset.Now;
+        var timestamp = DateTime.UtcNow;
 
         var messageEvent = new MessageEvent(e.Message, timestamp);
 
         try
         {
-            foreach (var subscription in _subscriptions
-                         .GetAll()
-                         .Where(subscription => MessageMatchesHandler(messageEvent.Data, subscription.Request)))
-            {
-                var userProcessTime = await MeasureUserProcessTime(async () => await subscription.DataHandler(messageEvent));
+            var handlers = _subscriptions
+                .GetAll()
+                .Where(subscription => MessageMatchesHandler(messageEvent.Data, subscription.Request))
+                .Select(subscription => Task.Run(() => subscription.DataHandler(messageEvent)));
 
-                if (userProcessTime.TotalMilliseconds > 500)
-                {
-                    _logger.LogTrace("Slow data handler ({UserProcessTimeMs} ms user code), consider " +
-                                     "offloading data handling to another thread. Data from this socket may arrive late " +
-                                     "or not at all if message processing is continuously slow.",
-                        userProcessTime.TotalMilliseconds);
-                }
-            }
+            await Task.WhenAll(handlers);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Subscriptions have failed: {Message}", ex.Message);
         }
-    }
-
-    private async Task<TimeSpan> MeasureUserProcessTime(Func<ValueTask> func)
-    {
-        var userProcessTime = Stopwatch.StartNew();
-
-        await func();
-
-        userProcessTime.Stop();
-        return userProcessTime.Elapsed;
     }
 }

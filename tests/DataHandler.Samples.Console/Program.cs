@@ -1,4 +1,5 @@
-﻿using DataHandler.Dummy;
+﻿using System.Diagnostics;
+using DataHandler.Dummy;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -20,7 +21,7 @@ await client.SubscribeToTradesAsync(tradeResult =>
 
 await client.SubscribeToTradesAsync(async tradeResult =>
 {
-    await Task.Delay(1200);
+    await Task.Delay(5000);
 
     Log.Information("#2: {@TradeResult}", tradeResult);
 });
